@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <cn.ian2018.materialedittext.MaterialEditText
+        android:id="@+id/edit_text"
+        android:hint="username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <cn.ian2018.materialedittext.NumberTimeView
+        app:layout_constraintTop_toBottomOf="@id/edit_text"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+</android.support.constraint.ConstraintLayout>
