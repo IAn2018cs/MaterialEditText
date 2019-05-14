@@ -41,7 +41,7 @@ public class NumberTimeView extends View {
 
     private Bitmap mBackgroundBitmap;
 
-    private final float HAND_END_CAP_RADIUS = 4f;
+    private final float HAND_END_CAP_RADIUS = 6f;
     private final float SHADOW_RADIUS = 6f;
 
     public NumberTimeView(Context context, AttributeSet attrs) {
@@ -58,7 +58,6 @@ public class NumberTimeView extends View {
         mHandPaint.setStrokeWidth(STROKE_WIDTH);
         // 消除锯齿
         mHandPaint.setAntiAlias(true);
-        mHandPaint.setStyle(Paint.Style.STROKE);
 
         mCalendar = Calendar.getInstance();
     }
@@ -106,9 +105,13 @@ public class NumberTimeView extends View {
          * 1minute = 60s
          */
         final float seconds =
-                (mCalendar.get(Calendar.SECOND) + mCalendar.get(Calendar.MINUTE) / 1000f);
-        final float secondsRotation = seconds *(6f / 60f);
+                (mCalendar.get(Calendar.SECOND) *1000f  + mCalendar.get(Calendar.MINUTE));
+        final float secondsRotation = seconds *(6f );
         Log.e("onDrawTT", "seconds " + seconds + "    secondsRotation  " + secondsRotation );
+
+        final float millisecond =  mCalendar.get(Calendar.MILLISECOND);
+        final float millisecondRotation = millisecond *(360f / (60f * 1000f));
+        Log.e("onDrawTT", "millisecond " + millisecond + "    millisecondRotation  " + millisecondRotation );
 
         // 在我们开始旋转它之前保存画布状态
         canvas.save();
@@ -120,7 +123,7 @@ public class NumberTimeView extends View {
         canvas.restore();
     }
 
-    private static final long INTERACTIVE_UPDATE_RATE_MS = TimeUnit.MILLISECONDS.toMillis(10);
+    private static final long INTERACTIVE_UPDATE_RATE_MS = TimeUnit.MILLISECONDS.toMillis(1);
     // 处理程序在交互模式下每秒更新一次
     private final Handler mUpdateTimeHandler = new Handler() {
         @Override
